@@ -1,9 +1,4 @@
-# amplify-mountain
-Amplify Mountain
-
-# License
-
-MIT License
+/* MIT License
 
 Copyright (c) 2022 Mountain Technologies LLC
 
@@ -23,4 +18,28 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SOFTWARE. */
+
+using Amazon.CDK;
+using Constructs;
+using Amazon.CDK.AWS.Amplify;
+
+namespace AmplifyMountain
+{
+    public class AmplifyConstructProps
+    {
+        public string Name;
+    }
+
+    public class AmplifyConstruct : Construct
+    {
+        internal AmplifyConstruct(Construct scope, string id, AmplifyConstructProps props) : base(scope, id)
+        {
+            var cfnApp = new CfnApp(this, "CfnApp", new CfnAppProps() {
+                Name = props.Name
+            });
+
+            new CfnOutput(this, "AmplifyConstruct", new CfnOutputProps { Value = $"Amplify" });
+        }
+    }
+}
