@@ -21,8 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 using Amazon.CDK;
+using Amazon.CDK.AWS.Amplify.Alpha;
 using Constructs;
-using Amazon.CDK.AWS.Amplify;
 
 namespace AmplifyMountain
 {
@@ -35,8 +35,14 @@ namespace AmplifyMountain
     {
         internal AmplifyConstruct(Construct scope, string id, AmplifyConstructProps props) : base(scope, id)
         {
-            var cfnApp = new CfnApp(this, "CfnApp", new CfnAppProps() {
-                Name = props.Name
+            // var cfnApp = new CfnApp(this, "CfnApp", new CfnAppProps() {
+            //     Name = props.Name,
+            //     Description = "An AWS Amplify CDK website by the team at Mountain Technologies LLC.",
+            // });
+
+            var amplifyApp = new Amazon.CDK.AWS.Amplify.Alpha.App(this, "AmplifyApp", new Amazon.CDK.AWS.Amplify.Alpha.AppProps
+            {
+                AppName = props.Name
             });
 
             new CfnOutput(this, "AmplifyConstruct", new CfnOutputProps { Value = $"Amplify" });
